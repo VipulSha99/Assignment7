@@ -27,7 +27,7 @@ export class TabularComponent implements OnInit {
   onEdit(event:any){
     event.path[0].value = "Save";
     event.path[1].childNodes[1].value = "Cancel";
-    for(let j=0;j<event.path[2].cells.length-2;j++){
+    for(let j=0;j<event.path[2].cells.length-4;j++){
       event.path[2].cells[j].childNodes[0].disabled = false;
       this.prevArray.push(event.path[2].cells[j].childNodes[0].value);
     }
@@ -40,13 +40,13 @@ export class TabularComponent implements OnInit {
     event.path[0].value = "Edit";
     event.path[1].childNodes[1].value = "Delete";
     let j:number=0;
-    for(j=0;j<event.path[2].cells.length-2;j++){
+    for(j=0;j<event.path[2].cells.length-4;j++){
       event.path[2].cells[j].childNodes[0].disabled = true;
-      // data[event.path[2].cells[j].childNodes[0].name]=event.path[2].cells[j].childNodes[0].value;
       editData[event.path[2].cells[j].childNodes[0].name]=event.path[2].cells[j].childNodes[0].value;
+      this.prevArray[j]=event.path[2].cells[j].childNodes[0].value;
     }
-    editData[event.path[2].cells[j].childNodes[0].name]=data.created_date;
-    this.userService.editUser(data.user_id as string,editData).subscribe(_=>{
+    editData[event.path[2].cells[j].childNodes[0].name]=data.createdAt;
+    this.userService.editUser(data.id as string,editData).subscribe(_=>{
       this.userService.getUsers().subscribe(newData=>{
         this.userData = newData;
       });
@@ -59,14 +59,14 @@ export class TabularComponent implements OnInit {
     event.path[0].value = "Delete";
     event.path[1].childNodes[0].value = "Edit";
     let j:number=0;
-    for(j=0;j<event.path[2].cells.length-2;j++){
+    for(j=0;j<event.path[2].cells.length-4;j++){
       event.path[2].cells[j].childNodes[0].disabled = true;
       event.path[2].cells[j].childNodes[0].value = this.prevArray[j];
     }
   }
 
   onDelete(selectedUser:UserModel){
-    this.userService.deleteUser(selectedUser.user_id as string).subscribe(_=>{
+    this.userService.deleteUser(selectedUser.id as string).subscribe(_=>{
       this.userService.getUsers().subscribe(newData=>{
         this.userData = newData;
       });

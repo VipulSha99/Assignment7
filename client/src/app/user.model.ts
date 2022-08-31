@@ -1,17 +1,23 @@
 export interface UserModel{
-    user_id?: string,
+    id?: string,
     first_name: string,
     middle_name: string,
     last_name: string,
     email: string,
     phone_number: number,
-    role: string,
+    role: {name:string},
+    customer:{name:string},
     address: string,
-    created_date: string,
+    createdAt: string,
+}
+
+export interface customer{
+    id: string,
+    name: string
 }
 
 export enum Role {
-    superAdmin = "SuperAdmin",
+    SuperAdmin = "SuperAdmin",
     Admin = "Admin",
     Subscriber = "Subscriber"
 }
@@ -22,8 +28,9 @@ export enum columnName{
     lastName= 'Last Name',
     email= 'Email',
     phoneNumber = 'Phone Number',
-    role= 'Role',
     address = 'Address',
+    role= 'Role',
+    customer = 'Customer',
     createdDate = 'User Created Date',
     edit = 'Edit'
   }

@@ -16,10 +16,19 @@
     padding: 10px;
     padding-bottom: 25px;
     background-color: dodgerblue !important;
-    color:white
+    color:white;
+    cursor: pointer;
 }
 .input_tag p{
     margin-block-start:5px;
     margin-block-end: 5px;
     color: red;
+}
+select{
+    height: 30px;
+    width: 130px;
+    font-size: 1em;
+    background-color: white;
+    border-color: #cbb3b3;
+    border-radius: 10px;
 }

@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CustomerService } from 'src/app/customer.service';
 import { UserService } from 'src/app/user.service';
-import {Role} from '../../user.model';
+import {customer, Role} from '../../user.model';
 
 @Component({
   selector: 'app-user-add',
@@ -13,19 +14,23 @@ export class UserAddComponent implements OnInit {
   addUserForm: FormGroup;
   addButtonClicked = false;
   role = Role;
+  customers: customer[];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,private customerService: CustomerService) { }
 
   ngOnInit(): void {
+    this.customerService.getCustomer().subscribe(newData=>{
+      this.customers = newData;
+    });
     this.addUserForm = new FormGroup({
       'firstName': new FormControl(null,[Validators.required]),
-      'middleName':new FormControl(null),
+      'middleName':new FormControl(''),
       'lastName':new FormControl(null,[Validators.required]),
       'email':new FormControl(null,[Validators.required,Validators.email]),
       'phoneNumber':new FormControl(null,[Validators.required]),
-      'role':new FormControl(null,[Validators.required,this.forbiddenNames.bind(this)]),
-      'address':new FormControl(null,[Validators.required]),
-      'createdDate':new FormControl(null)
+      'rid':new FormControl(null,[Validators.required,this.forbiddenNames.bind(this)]),
+      'cid':new FormControl(null,[Validators.required]),
+      'address':new FormControl(null,[Validators.required])
     })
   }
 
@@ -34,14 +39,8 @@ export class UserAddComponent implements OnInit {
       this.addButtonClicked = true;
       return;
     }
-    // else if(this.addUserForm.get('role')){
-      
-    // }
     else{
       this.addButtonClicked = false;
-      this.addUserForm.patchValue({
-        'createdDate': new Date()
-      })
       this.userService.addUser(this.addUserForm.value).subscribe(responseData=>{
         this.addUserForm.reset();
         this.updatedData.emit();
