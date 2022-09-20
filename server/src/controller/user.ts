@@ -37,11 +37,11 @@ export const createUser = async (req:Request,res:Response)=>{
             where: { name: role }
           })
         const data = await User.create({ 
-            first_name:firstName,
-            middle_name:middleName,
-            last_name:lastName,
+            firstName:firstName,
+            middleName:middleName,
+            lastName:lastName,
             email:email,
-            phone_number:phoneNumber,
+            phoneNumber:phoneNumber,
             address:address,
             rid:rid?.toJSON().id,
             cid:cid
@@ -63,11 +63,11 @@ export const updateUser = async (req:Request,res:Response)=>{
     const address = req.body.address;
     try{
         const data = await User.update({
-            first_name:firstName,
-            middle_name:middleName,
-            last_name:lastName,
+            firstName:firstName,
+            middleName:middleName,
+            lastName:lastName,
             email:email,
-            phone_number:phoneNumber,
+            phoneNumber:phoneNumber,
             address:address
         },{
             where:{ id: id}

@@ -11,6 +11,6 @@ export class CustomerService {
   constructor(private http: HttpClient) { }
 
   getCustomer(){
-    return this.http.get<customer[]>(environment.apiURL+'/customer');
+    return this.http.get<customer[]>(environment.apiURL+'/customers');
   }
 }

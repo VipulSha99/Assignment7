@@ -16,9 +16,9 @@ const app = express();
 app.use(express.json({limit: "30mb"}));
 app.use(cors());
 
-app.use('/user',userRouter);
-app.use('/role',roleRouter);
-app.use('/customer',customerRouter);
+app.use('/users',userRouter);
+app.use('/roles',roleRouter);
+app.use('/customers',customerRouter);
 
 User.belongsTo(Customer, {
         foreignKey: 'cid'

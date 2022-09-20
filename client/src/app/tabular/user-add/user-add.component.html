@@ -33,7 +33,7 @@
         <select required formControlName="cid" >
             <option *ngFor="let customer of customers" [value]="customer.id" >{{customer.name}}</option>
         </select>
-        <p *ngIf="!addUserForm.get('cid')?.valid && !addUserForm.get('rid')?.touched" style="color: black;">Choose Customer</p>
+        <p *ngIf="!addUserForm.get('cid')?.valid && !addUserForm.get('cid')?.touched" [ngStyle]="{color:!addUserForm.get('cid')?.touched? 'black':'red'}">Choose Customer</p>
     </div>
     <div>
         <input type="submit" class="btn" value="Add User"/>
