@@ -1,6 +1,6 @@
 # Assignment 7
 
-## ✨Tabular Representation in Type Script with Backend server having Sequelize ORM✨
+## ✨Tabular Representation in Angular with Backend server having Sequelize ORM✨
 
 # Run code for both client and server separately -
 #### Install dependencies:
